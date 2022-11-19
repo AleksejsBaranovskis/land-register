@@ -10,11 +10,11 @@ return new class extends Migration
 
     public function up()
     {
-        Schema::create('land_unit', function (Blueprint $table) {
+        Schema::create('land_units', function (Blueprint $table) {
             $table->id();
             $table->foreignId('land_property_id')->constrained()->onDelete('cascade');
             $table->foreignId('land_usage_id')->nullable();
-            $table->unsignedInteger('cadastral_nr');
+            $table->unsignedBigInteger('cadastral_nr');
             $table->float('total_area(ha)');
             $table->date('measurement_date');
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('land_unit');
+        Schema::dropIfExists('land_units');
     }
 };
