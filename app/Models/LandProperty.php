@@ -11,6 +11,12 @@ class LandProperty extends Model
 {
     use HasFactory;
 
+    // Status types
+    public const PURCHASE_AGREEMENT = 1;
+    public const PAID = 2;
+    public const REGISTERED = 3;
+    public const SOLD = 4;
+
     protected $fillable = ['user_id', 'name', 'cadastral_nr', 'status'];
 
     // Relationship with user
@@ -23,5 +29,28 @@ class LandProperty extends Model
     public function landUnit(): HasMany
     {
         return $this->hasMany(LandUnit::class);
+    }
+
+    // Land property status transformation
+    public static function landPropertyStatusTypes(): array
+    {
+        return [
+            self::PURCHASE_AGREEMENT => 'Purchase agreement',
+            self::PAID => 'Paid',
+            self::REGISTERED => 'Registered',
+            self::SOLD => 'Sold'
+        ];
+    }
+
+    // Show property status
+    public function getLandPropertyStatus(int $status): string
+    {
+        return self::landPropertyStatusTypes()[$status];
+    }
+
+    // Show land property cadastral number properly if it starts with 0
+    public function getLandPropertyZerofill(): string
+    {
+        return str_pad($this->attributes['cadastral_nr'], 11, '0', STR_PAD_LEFT);
     }
 }
