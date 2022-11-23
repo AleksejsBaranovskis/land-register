@@ -46,8 +46,8 @@ class User extends Authenticatable
         return str_pad($this->attributes['identification_nr/registration_nr'], 11, '0', STR_PAD_LEFT);
     }
 
-    // Show user land property total area
-    public function getLandPropertyTotalArea(): float
+    // Get user land property total area
+    public function getLandPropertiesTotalArea(): float
     {
         $sum = 0;
         foreach ($this->landProperty as $property){

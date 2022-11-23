@@ -24,15 +24,22 @@ class UserController extends Controller
     // Store new user
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'type' => 'required',
-            'identification_nr/registration_nr' => ['digits:11', 'required', 'numeric']
-        ]);
+        $user = User::where(['identification_nr/registration_nr' => $request['identification_nr/registration_nr']])
+            ->first();
 
-        User::create($data);
+        if(!$user) {
+            $data = $request->validate([
+                'name' => 'required',
+                'type' => 'required',
+                'identification_nr/registration_nr' => ['digits:11', 'required', 'numeric']
+            ]);
 
-        return redirect('/')->with('message', 'User created successfully!');
+            User::create($data);
+
+            return redirect('/')->with('message', 'User created successfully!');
+        } else {
+            return back()->with('message', 'User already exist!');
+        }
     }
 
     // Show edit form
@@ -58,6 +65,22 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect('/')->with('message', 'User deleted successfully!');
+        return back()->with('message', 'User deleted successfully!');
+    }
+
+    // Show users without land properties
+    public function showUsersWithoutProperties()
+    {
+        $users = User::all();
+        $userWithoutProperties = [];
+        foreach ($users as $user) {
+            if (count($user->landProperty) == 0) {
+                $userWithoutProperties [] = $user;
+            }
+        }
+
+        return view('users/users-without-properties', [
+            'users' => $userWithoutProperties
+        ]);
     }
 }

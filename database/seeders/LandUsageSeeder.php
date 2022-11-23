@@ -11,10 +11,10 @@ class LandUsageSeeder extends Seeder
 {
 
     private const LAND_USAGE_TYPE = [
-        'lauksaimniecības zeme',
-        'meža zeme',
-        'zeme zem ūdeņiem',
-        'apbūves platība'
+        'agricultural land',
+        'woodland',
+        'land under waters',
+        'built-up area'
     ];
 
     public function run()

@@ -6,15 +6,15 @@
             </div>
             <div class="flex items-center justify-between">
                 <div class="lg:ml-40 ml-10 space-x-8">
-                    <a href="users/users-without-properties">
+                    <a href="/">
                         <button
                             class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                            No properties
+                            Show all
                         </button>
                     </a>
                 </div>
                 <div class="lg:ml-40 ml-10 space-x-8">
-                    <a href="users/create">
+                    <a href="/users/create">
                         <button
                             class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                             Create

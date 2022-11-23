@@ -5,18 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\LandProperty;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
 
 class LandPropertyController extends Controller
 {
-    // Show all users
+    // Show all land properties
     public function index()
     {
         return view('properties/index', [
-            'properties' => LandProperty::all()
+            'properties' => LandProperty::latest()->get()
         ]);
     }
 
-    // Show property create form
+    // Show create form
     public function create()
     {
         return view('properties/create');
@@ -77,5 +79,53 @@ class LandPropertyController extends Controller
         $property->delete();
 
         return back()->with('message', 'Land property deleted successfully!');
+    }
+
+    // Show user's properties
+    public function showUserProperties(int $id)
+    {
+        $properties = LandProperty::where('user_id', $id)->get();
+        $user = User::where('id', $id)->first();
+
+        return view('properties/user-properties', [
+            'properties' => $properties,
+            'user' => $user
+        ]);
+    }
+
+    // Show properties without land units
+    public function showPropertiesWithoutUnits()
+    {
+        $properties = LandProperty::all();
+        $propertiesWithoutUnits = [];
+        foreach ($properties as $property) {
+            if (count($property->landUnit) == 0) {
+                $propertiesWithoutUnits [] = $property;
+            }
+        }
+
+        return view('properties/properties-without-units', [
+            'properties' => $propertiesWithoutUnits
+        ]);
+    }
+
+    // Show user's property without units
+    public function showUserPropertiesWithoutUnits(int $id)
+    {
+        $properties = LandProperty::where('user_id', $id)->get();
+        $user = User::where('id', $id)->first();
+        $propertiesWithoutUnits = [];
+        foreach ($properties as $property)
+        {
+            if (count($property->landUnit) == 0)
+            {
+                $propertiesWithoutUnits [] = $property;
+            }
+        }
+
+        return view('properties/user-properties-without-units', [
+            'properties' => $propertiesWithoutUnits,
+            'user' => $user
+        ]);
     }
 }

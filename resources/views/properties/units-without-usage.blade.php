@@ -2,28 +2,36 @@
     <div class="bg-white p-8 rounded-md w-full">
         <div class=" flex items-center justify-between pb-6">
             <div>
-                <h2 class="text-gray-600 font-semibold">User list</h2>
+                <h2 class="text-gray-600 font-semibold">{{$property->name}}'s unit list</h2>
             </div>
             <div class="flex items-center justify-between">
                 <div class="lg:ml-40 ml-10 space-x-8">
-                    <a href="users/users-without-properties">
+                    <a href="/properties/{{$property->id}}/units">
                         <button
                             class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                            No properties
+                            Show all
                         </button>
                     </a>
                 </div>
-                <div class="lg:ml-40 ml-10 space-x-8">
-                    <a href="users/create">
+                <div class="lg:ml-40 ml-2 space-x-8">
+                    <a href="/properties/{{$property->id}}/units/create">
                         <button
                             class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                             Create
                         </button>
                     </a>
                 </div>
+                <div class="lg:ml-40 ml-10 space-x-8">
+                    <a href="{{url()->previous()}}">
+                        <button
+                            class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                            Back
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
-        @unless((count($users)) == 0)
+        @unless((count($units)) == 0)
             <div>
                 <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -36,32 +44,32 @@
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    name
+                                    cadastral&nbsp;nr
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    id/reg.nr
+                                    total&nbsp;area
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Total&nbsp;area
+                                    measurement&nbsp;date
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Properties
+                                    land&nbsp;use
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Edit
+                                    edit
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Delete
+                                    delete
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @for($i=0; $i<count($users); $i++)
+                            @for($i=0; $i<count($units); $i++)
                                 <tr>
                                     <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm">
                                         <div class="flex items-center">
@@ -76,48 +84,28 @@
                                         <div class="flex items-center">
                                             <div class="ml-3">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    {{$users[$i]->name}}
+                                                    {{$units[$i]->getLandUnitZerofill()}}
                                                 </p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        @if($users[$i]->type == 1)
-                                            <p class="text-gray-900 whitespace-no-wrap">
-                                                id {{substr($users[$i]->getUserIdZerofill(), 0, 6)}}
-                                                - {{substr($users[$i]->getUserIdZerofill(), 6, 5)}}
-                                            </p>
-                                        @else
-                                            <p class="text-gray-900 whitespace-no-wrap">
-                                                reg.nr {{$users[$i]->getUserIdZerofill()}}
-                                            </p>
-                                        @endif
-                                    </td>
-                                    <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <div class="flex items-center">
-                                            <div class="ml-3">
-                                                <p class="text-gray-900 whitespace-no-wrap">
-                                                    {{$users[$i]->getLandPropertiesTotalArea()}}&nbsp;ha
-                                                </p>
-                                            </div>
-                                        </div>
+                                        {{$units[$i]['total_area(ha)']}}
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a href="/{{$users[$i]->id}}/properties">
-                                            <button
-                                                class="bg-transparent hover:bg-indigo-600 text-indigo-600 font-semibold hover:text-white py-2 px-4 border border-indigo-600 hover:border-transparent rounded">
-                                                View
-                                            </button>
-                                        </a>
+                                        {{$units[$i]->measurement_date}}
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        {{$units[$i]->getLandUnitType($units[$i]->land_usage_id)}}
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-lg">
-                                        <form method="GET" action="/users/{{$users[$i]->id}}/edit">
+                                        <form method="GET" action="/properties/{{$property->id}}/units/{{$units[$i]->id}}/edit">
                                             @csrf
                                             <button><i class="fa-solid fa-pen-to-square"></i></button>
                                         </form>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-lg">
-                                        <form method="POST" action="/{{$users[$i]->id}}">
+                                        <form method="POST" action="/properties/{{$property->id}}/units/{{$units[$i]->id}}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="text-red-500"><i class="fa-solid fa-trash"></i></button>
@@ -131,7 +119,7 @@
                 </div>
             </div>
         @else
-            <p>No users found.</p>
+            <p>No land units found.</p>
         @endunless
     </div>
 </x-layout>

@@ -53,4 +53,5 @@ class LandProperty extends Model
     {
         return str_pad($this->attributes['cadastral_nr'], 11, '0', STR_PAD_LEFT);
     }
+
 }
