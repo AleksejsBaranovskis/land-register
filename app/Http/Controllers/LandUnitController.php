@@ -13,6 +13,7 @@ class LandUnitController extends Controller
     public function index(int $id)
     {
         $units = LandUnit::where('land_property_id', $id)->orderBy('total_area(ha)', 'desc')->get();
+
         $property = LandProperty::where('id', $id)->first();
 
         return view('properties/property-units', [
@@ -114,8 +115,11 @@ class LandUnitController extends Controller
     public function showLandUnitsWithoutUsage(int $id)
     {
         $units = LandUnit::where('land_property_id', $id)->orderBy('total_area(ha)', 'desc')->get();
+
         $property = LandProperty::where('id', $id)->first();
+
         $unitsWithoutUsage = [];
+
         foreach ($units as $unit) {
             if ($unit->land_usage_id == 0) {
                 $unitsWithoutUsage [] = $unit;

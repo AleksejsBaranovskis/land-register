@@ -99,13 +99,15 @@
                                         {{$units[$i]->getLandUnitType($units[$i]->land_usage_id)}}
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-lg">
-                                        <form method="GET" action="/properties/{{$property->id}}/units/{{$units[$i]->id}}/edit">
+                                        <form method="GET"
+                                              action="/properties/{{$property->id}}/units/{{$units[$i]->id}}/edit">
                                             @csrf
                                             <button><i class="fa-solid fa-pen-to-square"></i></button>
                                         </form>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-lg">
-                                        <form method="POST" action="/properties/{{$property->id}}/units/{{$units[$i]->id}}">
+                                        <form method="POST"
+                                              action="/properties/{{$property->id}}/units/{{$units[$i]->id}}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="text-red-500"><i class="fa-solid fa-trash"></i></button>

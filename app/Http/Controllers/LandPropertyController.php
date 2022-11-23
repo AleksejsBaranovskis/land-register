@@ -32,7 +32,7 @@ class LandPropertyController extends Controller
 
         $property = LandProperty::where('cadastral_nr', $request->cadastral_nr)->first();
 
-        if(!$property) {
+        if (!$property) {
             $data = $request->validate([
                 'name' => 'required',
                 'cadastral_nr' => ['digits:11', 'required', 'numeric'],
@@ -85,6 +85,7 @@ class LandPropertyController extends Controller
     public function showUserProperties(int $id)
     {
         $properties = LandProperty::where('user_id', $id)->get();
+
         $user = User::where('id', $id)->first();
 
         return view('properties/user-properties', [
@@ -97,7 +98,9 @@ class LandPropertyController extends Controller
     public function showPropertiesWithoutUnits()
     {
         $properties = LandProperty::all();
+
         $propertiesWithoutUnits = [];
+
         foreach ($properties as $property) {
             if (count($property->landUnit) == 0) {
                 $propertiesWithoutUnits [] = $property;
@@ -113,12 +116,13 @@ class LandPropertyController extends Controller
     public function showUserPropertiesWithoutUnits(int $id)
     {
         $properties = LandProperty::where('user_id', $id)->get();
+
         $user = User::where('id', $id)->first();
+
         $propertiesWithoutUnits = [];
-        foreach ($properties as $property)
-        {
-            if (count($property->landUnit) == 0)
-            {
+
+        foreach ($properties as $property) {
+            if (count($property->landUnit) == 0) {
                 $propertiesWithoutUnits [] = $property;
             }
         }

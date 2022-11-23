@@ -50,8 +50,9 @@ class User extends Authenticatable
     public function getLandPropertiesTotalArea(): float
     {
         $sum = 0;
-        foreach ($this->landProperty as $property){
-            $sum+=$property->landUnit()->sum('total_area(ha)');
+
+        foreach ($this->landProperty as $property) {
+            $sum += $property->landUnit()->sum('total_area(ha)');
         }
         return $sum;
     }

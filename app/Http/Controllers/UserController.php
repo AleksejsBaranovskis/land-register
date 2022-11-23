@@ -27,7 +27,7 @@ class UserController extends Controller
         $user = User::where(['identification_nr/registration_nr' => $request['identification_nr/registration_nr']])
             ->first();
 
-        if(!$user) {
+        if (!$user) {
             $data = $request->validate([
                 'name' => 'required',
                 'type' => 'required',
@@ -43,12 +43,14 @@ class UserController extends Controller
     }
 
     // Show edit form
-    public function edit(User $user) {
+    public function edit(User $user)
+    {
         return view('users/edit', ['user' => $user]);
     }
 
     // Update user
-    public function update(Request $request, User $user) {
+    public function update(Request $request, User $user)
+    {
         $data = $request->validate([
             'name' => 'required',
             'type' => 'required',
@@ -72,7 +74,9 @@ class UserController extends Controller
     public function showUsersWithoutProperties()
     {
         $users = User::all();
+
         $userWithoutProperties = [];
+
         foreach ($users as $user) {
             if (count($user->landProperty) == 0) {
                 $userWithoutProperties [] = $user;
