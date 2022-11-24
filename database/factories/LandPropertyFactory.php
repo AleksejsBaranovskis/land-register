@@ -15,7 +15,7 @@ class LandPropertyFactory extends Factory
     {
         return [
             'user_id' => rand(1, User::count()),
-            'name' => fake()->address,
+            'name' => fake()->word,
             'cadastral_nr' => fake()->unique()->numberBetween(9999999999, 100000000000),
             'status' => rand(1, 4)
         ];

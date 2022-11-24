@@ -30,8 +30,8 @@
             </a>
         </li>
         <li>
-            <a href="/units" class="hover:text-indigo-300 text-white">
-                Land Units
+            <a href="/all" class="hover:text-indigo-300 text-white">
+                Summary
             </a>
         </li>
     </ul>

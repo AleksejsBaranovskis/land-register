@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\LandPropertyController;
+use App\Http\Controllers\LandRegisterController;
 use App\Http\Controllers\LandUnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+// Summary view
+Route::get('/all', [LandRegisterController::class, 'index']);
 
 /** User routes */
 
