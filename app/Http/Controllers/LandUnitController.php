@@ -114,20 +114,15 @@ class LandUnitController extends Controller
     // Show land units without usage
     public function showLandUnitsWithoutUsage(int $id)
     {
-        $units = LandUnit::where('land_property_id', $id)->orderBy('total_area(ha)', 'desc')->get();
+        $units = LandUnit::where('land_property_id', $id)
+            ->where('land_usage_id', '=', 0)
+            ->orderBy('total_area(ha)', 'desc')
+            ->get();
 
         $property = LandProperty::where('id', $id)->first();
 
-        $unitsWithoutUsage = [];
-
-        foreach ($units as $unit) {
-            if ($unit->land_usage_id == 0) {
-                $unitsWithoutUsage [] = $unit;
-            }
-        }
-
         return view('properties/units-without-usage', [
-            'units' => $unitsWithoutUsage,
+            'units' => $units,
             'property' => $property
         ]);
     }

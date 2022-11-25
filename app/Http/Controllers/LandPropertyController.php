@@ -58,7 +58,13 @@ class LandPropertyController extends Controller
         ]);
     }
 
-    // Update land property
+    // Update land property/        $propertiesWithoutUnits = [];
+//
+//        foreach ($properties as $property) {
+//            if (count($property->landUnit) == 0) {
+//                $propertiesWithoutUnits [] = $property;
+//            }
+//        }
     public function update(Request $request, LandProperty $property)
     {
         $data = $request->validate([
@@ -97,38 +103,22 @@ class LandPropertyController extends Controller
     // Show properties without land units
     public function showPropertiesWithoutUnits()
     {
-        $properties = LandProperty::all();
-
-        $propertiesWithoutUnits = [];
-
-        foreach ($properties as $property) {
-            if (count($property->landUnit) == 0) {
-                $propertiesWithoutUnits [] = $property;
-            }
-        }
+        $properties = LandProperty::doesntHave('landUnit')->get();
 
         return view('properties/properties-without-units', [
-            'properties' => $propertiesWithoutUnits
+            'properties' => $properties
         ]);
     }
 
     // Show user's property without units
     public function showUserPropertiesWithoutUnits(int $id)
     {
-        $properties = LandProperty::where('user_id', $id)->get();
+        $properties = LandProperty::where('user_id', $id)->doesntHave('landUnit')->get();
 
         $user = User::where('id', $id)->first();
 
-        $propertiesWithoutUnits = [];
-
-        foreach ($properties as $property) {
-            if (count($property->landUnit) == 0) {
-                $propertiesWithoutUnits [] = $property;
-            }
-        }
-
         return view('properties/user-properties-without-units', [
-            'properties' => $propertiesWithoutUnits,
+            'properties' => $properties,
             'user' => $user
         ]);
     }

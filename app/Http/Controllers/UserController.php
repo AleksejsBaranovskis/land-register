@@ -73,18 +73,10 @@ class UserController extends Controller
     // Show users without land properties
     public function showUsersWithoutProperties()
     {
-        $users = User::all();
-
-        $userWithoutProperties = [];
-
-        foreach ($users as $user) {
-            if (count($user->landProperty) == 0) {
-                $userWithoutProperties [] = $user;
-            }
-        }
+        $users = User::doesntHave('landProperty')->get();
 
         return view('users/users-without-properties', [
-            'users' => $userWithoutProperties
+            'users' => $users
         ]);
     }
 }
