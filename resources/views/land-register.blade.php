@@ -104,59 +104,60 @@
                                                             </div>
                                                         </td>
                                                         @if(count($property->landUnit) !== 0)
-                                                        <td class="px-2 pb-5 border-b border-l border-gray-200 bg-white text-sm">
-                                                            <table class="min-w-full leading-normal">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th
-                                                                        class="px-5 py-3 w-1/3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                                        cadastral&nbsp;nr
-                                                                    </th>
-                                                                    <th
-                                                                        class="px-5 py-3 w-1/3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                                        total&nbsp;area
-                                                                    </th>
-                                                                    <th
-                                                                        class="px-5 py-3 w-1/3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                                        land use
-                                                                    </th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                @foreach($property->landUnit as $unit)
+                                                            <td class="px-2 pb-5 border-b border-l border-gray-200 bg-white text-sm">
+                                                                <table class="min-w-full leading-normal">
+                                                                    <thead>
                                                                     <tr>
-                                                                        <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm w-32">
-                                                                            <div class="flex items-center">
-                                                                                <div class="ml-3">
-                                                                                    <p class="text-gray-900 whitespace-no-wrap">
-                                                                                        {{$unit->cadastral_nr}}
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm w-32">
-                                                                            <div class="flex items-center">
-                                                                                <div class="ml-3">
-                                                                                    <p class="text-gray-900 whitespace-no-wrap">
-                                                                                        {{$unit['total_area(ha)']}} ha
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm w-32">
-                                                                            <div class="flex items-center">
-                                                                                <div class="ml-3">
-                                                                                    <p class="text-gray-900 whitespace-no-wrap">
-                                                                                        {{$unit->getLandUnitType($unit->land_usage_id)}}
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
+                                                                        <th
+                                                                            class="px-5 py-3 w-1/3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                                            cadastral&nbsp;nr
+                                                                        </th>
+                                                                        <th
+                                                                            class="px-5 py-3 w-1/3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                                            total&nbsp;area
+                                                                        </th>
+                                                                        <th
+                                                                            class="px-5 py-3 w-1/3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                                            land use
+                                                                        </th>
                                                                     </tr>
-                                                                @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @foreach($property->landUnit as $unit)
+                                                                        <tr>
+                                                                            <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm w-32">
+                                                                                <div class="flex items-center">
+                                                                                    <div class="ml-3">
+                                                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                                                            {{$unit->cadastral_nr}}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm w-32">
+                                                                                <div class="flex items-center">
+                                                                                    <div class="ml-3">
+                                                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                                                            {{$unit['total_area(ha)']}}
+                                                                                            ha
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm w-32">
+                                                                                <div class="flex items-center">
+                                                                                    <div class="ml-3">
+                                                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                                                            {{$unit->getLandUnitType($unit->land_usage_id)}}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
                                                         @else
                                                             <td class="px-2 py-5 border-b border-l border-gray-200 bg-white text-sm">
                                                                 <p class="text-gray-900 whitespace-no-wrap text-center">

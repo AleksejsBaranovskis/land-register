@@ -89,23 +89,9 @@
                                         {{$properties[$i]->getLandPropertyZerofill()}}
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        @if($properties[$i]->status == 1)
-                                            <p class="text-yellow-600 whitespace-no-wrap">
+                                            <p class="text-gray-900 whitespace-no-wrap">
                                                 {{$properties[$i]->getLandPropertyStatus($properties[$i]->status)}}
                                             </p>
-                                        @elseif($properties[$i]->status == 2)
-                                            <p class="text-green-500 whitespace-no-wrap">
-                                                {{$properties[$i]->getLandPropertyStatus($properties[$i]->status)}}
-                                            </p>
-                                        @elseif($properties[$i]->status == 3)
-                                            <p class="text-green-900 whitespace-no-wrap">
-                                                {{$properties[$i]->getLandPropertyStatus($properties[$i]->status)}}
-                                            </p>
-                                        @else
-                                            <p class="text-red-900 whitespace-no-wrap">
-                                                {{$properties[$i]->getLandPropertyStatus($properties[$i]->status)}}
-                                            </p>
-                                        @endif
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         {{$properties[$i]->user->name}}
