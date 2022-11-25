@@ -1,6 +1,6 @@
 # Land Register App
 
-Simple land register CRUD project built on Laravel 9 for information storage. 
+Simple land register CRUD project for information storage built on Laravel 9.
 
 ## Requirements
 
