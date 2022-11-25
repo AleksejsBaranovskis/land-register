@@ -58,13 +58,8 @@ class LandPropertyController extends Controller
         ]);
     }
 
-    // Update land property/        $propertiesWithoutUnits = [];
-//
-//        foreach ($properties as $property) {
-//            if (count($property->landUnit) == 0) {
-//                $propertiesWithoutUnits [] = $property;
-//            }
-//        }
+    // Update land property
+
     public function update(Request $request, LandProperty $property)
     {
         $data = $request->validate([
