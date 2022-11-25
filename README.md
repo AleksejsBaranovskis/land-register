@@ -38,3 +38,7 @@ php artisan db:seed
 ~~~
 php artisan serve
 ~~~
+
+## Preview
+
+![Screenshot](user-list.png)
